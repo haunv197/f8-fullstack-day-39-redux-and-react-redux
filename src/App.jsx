@@ -3,9 +3,9 @@ import "./App.css";
 import TodoApp from "./pages/TodoApp";
 function App() {
   return (
-    <Router>
+    <Router basename="/f8-fullstack-day-39-redux/">
       <Routes>
-        <Route path="/todo" element={<TodoApp />} />
+        <Route path="/" element={<TodoApp />} />
       </Routes>
     </Router>
   );
