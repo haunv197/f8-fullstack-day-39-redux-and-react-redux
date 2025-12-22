@@ -8,7 +8,8 @@ import useHandleTodo from "@/hooks/useHandleTodo";
 function TodoApp() {
   // Do initState yêu cầu ban đầu là mảng rỗng không phải object nên mới phải trả về state, nếu là object thì sẽ là state.todos
   const todos = useSelector((state) => state);
-  const { inputRef, handleForm, handleEdit, handleDelete } = useHandleTodo();
+  const { inputRef, handleForm, handleEdit, handleDelete, error } =
+    useHandleTodo();
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -32,6 +33,7 @@ function TodoApp() {
               Add Todo
             </Button>
           </div>
+          {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
         </form>
 
         {/* Task list */}

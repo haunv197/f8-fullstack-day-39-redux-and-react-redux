@@ -1,6 +1,6 @@
 import { ADD_TODO, DELETE_TODO, EDIT_TODO } from "./constants";
 
-const initState = JSON.parse(localStorage.getItem("todos")) || [];
+const initState = [];
 
 function reducer(state = initState, action) {
   switch (action.type) {

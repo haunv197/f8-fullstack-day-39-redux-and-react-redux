@@ -1,27 +1,20 @@
 import { useDispatch } from "@/libs/react-redux";
 import { ADD_TODO, DELETE_TODO, EDIT_TODO } from "@/store/constants";
-import { useRef } from "react";
-
-function handleValidateInput(str) {
-  if (!str.trim()) {
-    alert("Please enter a todo item");
-    return false;
-  }
-  return true;
-}
+import { useRef, useState } from "react";
 
 function useHandleTodo() {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
 
   const handleForm = (e) => {
     e.preventDefault();
     const value = inputRef.current.value.trim();
-    const isValid = handleValidateInput(value);
-    if (!isValid) {
+    if (!value) {
+      setError("Please enter a todo item");
       return;
     }
-
+    setError("");
     dispatch({
       type: ADD_TODO,
       payload: {
@@ -63,6 +56,7 @@ function useHandleTodo() {
     handleForm,
     handleEdit,
     handleDelete,
+    error,
   };
 }
 

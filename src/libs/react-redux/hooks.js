@@ -5,7 +5,7 @@ function useStore() {
   const store = useContext(Context);
   if (store === undefined) {
     throw Error(
-      "Could not find react-redux context value; please ensure the component is wrapped in a Provider"
+      "Could not find react-redux context value; please ensure the component is wrapped in a ReduxProvider"
     );
   }
   return store;
@@ -24,7 +24,7 @@ function useSelector(selector) {
   const [value, setValue] = useState(initValue);
 
   useEffect(() => {
-    if (initState === store.getState()) {
+    if (initValue === store.getState()) {
       console.warn(
         "Selector unknown returned a different result when called with the same parameters. This can lead to unnecessary rerenders"
       );
@@ -38,7 +38,7 @@ function useSelector(selector) {
       if (initState === newState) return;
 
       const newValue = selector(newState);
-      if (value != newValue) setValue(newValue);
+      if (value !== newValue) setValue(newValue);
     });
     return unsubscribe;
   }, [value, selector, store, initState]);
